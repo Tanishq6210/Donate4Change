@@ -67,6 +67,8 @@ export default function Home(){
           env: 'staging'
         })
       }
+    
+    
 
     async function SignIn(){
         const authState = await auth.signIn();

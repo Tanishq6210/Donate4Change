@@ -6,8 +6,10 @@ import * as eth from "@polybase/eth"
 // ADDING ELEMENTS INTO POLYBASE DATABASE
 import { Polybase } from "@polybase/client"
 
-const db = new Polybase({ defaultNamespace: "pk/0x9ba24d248a889aaf1f672a06e402c097539ac929498eb969e8dee42e58690f5a36a0057225a825e9248a31fbdfab6c7eb6324837a3423227f71bcdf2ba56d307/Donate4Change" });
-const collectionReference = db.collection("Test2");
+const db = new Polybase({
+  defaultNamespace: "pk/0xbcbb58bd708784594a6f5d020544c5208e6a1c43c58238307a35df3f47611adc0d251f3c8d0f5fff4b552d6142bdfa9bc835b602b72ccda5390848a08ef3ac90/donate4change",
+});
+const collectionReference = db.collection("NGO");
 
 db.signer(async (data) => {
     // A permission dialog will be presented to the user
