@@ -2,8 +2,9 @@ import { useState } from "react";
 import React from 'react';
 import { Polybase } from "@polybase/client"
 import "./About.css";
-import {Helmet} from 'react-helmet';
 import { ethers } from "ethers";
+import * as PushAPI from "@pushprotocol/restapi";
+import { send } from "@pushprotocol/restapi/src/lib/chat";
 
 const db = new Polybase({
   defaultNamespace: "pk/0xbcbb58bd708784594a6f5d020544c5208e6a1c43c58238307a35df3f47611adc0d251f3c8d0f5fff4b552d6142bdfa9bc835b602b72ccda5390848a08ef3ac90/donate4change",
@@ -15,34 +16,87 @@ function NGOs(){
     const [amt, setAmt] = useState("0");
     const [ngoKey, setNgoKey] = useState("");
 
+    let contractAddress = "0xfa5e95bdea02bC7BD3C7ba2F6705805975186aD2"
     let abi = [
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "to",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amt",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            }
+          ],
+          "name": "newTransaction",
+          "type": "event"
+        },
         {
           "inputs": [
             {
               "internalType": "string",
-              "name": "_recipient",
+              "name": "add",
               "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amt",
+              "type": "uint256"
             }
           ],
-          "name": "insertRecipient",
+          "name": "makeTransaction",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
         },
         {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "ind",
-              "type": "uint256"
-            }
-          ],
-          "name": "getRecipient",
+          "inputs": [],
+          "name": "getAllTransactions",
           "outputs": [
             {
-              "internalType": "string",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "from",
+                  "type": "address"
+                },
+                {
+                  "internalType": "string",
+                  "name": "to",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amt",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "time",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct Donation.Transaction[]",
               "name": "",
-              "type": "string"
+              "type": "tuple[]"
             }
           ],
           "stateMutability": "view",
@@ -50,8 +104,6 @@ function NGOs(){
           "constant": true
         }
       ]
-  
-    let contractAddress = "0xbC04eBd43668455D8E77bb3B96C947507d9feE"
 
     async function listRecords () {
         const records = await collectionReference.get();
@@ -59,14 +111,47 @@ function NGOs(){
 
     }
 
+    async function sendNotification(message) {
+      const PK = "69e51a9f0c93ff5c52f66795b1434bf07ca827e412b38cfa52b3293ffc816c2e"; // channel private key
+      const Pkey = `0x${PK}`;
+      const signer = new ethers.Wallet(Pkey);
+      const data = await signer.getAddress();
+
+      await PushAPI.payloads.sendNotification({
+        signer,
+        type: 3, // target
+        identityType: 2, // direct payload
+        notification: {
+          title: 'Donate4Change',
+          body: `Donation Successfull`
+        },
+        payload: {
+          title: `Donate4Change`,
+          body: `${message}`,
+          cta: '',
+          img: ''
+        },
+        recipients: 'eip155:5:' + data, // recipient address
+        channel: 'eip155:5:0x66a9633AC8E529B6CcD8E4c752901A71FcDf54A7', // your channel address
+        onSuccess: () => {
+          console.log('opt in success');
+         },
+         onError: (err) => {
+           console.error("Error is:" + err.message);
+         },
+        env: 'staging'
+      });
+    }
+
     function donateNGO(address) {
       donate(address)
     } 
 
     async function donate(address) {
-      console.log(address.toString())
+       console.log(address.toString())
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
+        const contract = new ethers.Contract(contractAddress, abi, signer);
 
         const addressToValue = address;
         const ETHAmountValue = amt;
@@ -83,6 +168,11 @@ function NGOs(){
         // // Send the transaction and log the receipt
         const receipt = await signer.sendTransaction(transactionRequest);
         console.log(receipt);
+
+        const tx = await contract.makeTransaction(addressToValue, weiAmountValue);
+        console.log(tx)
+        sendNotification("You have donated " + ETHAmountValue + " ETH to " + addressToValue + "wei !")
+        alert("You have donated " + ETHAmountValue + " ETH to " + addressToValue + "wei !")
     }
 
     // function getNGOs() {
