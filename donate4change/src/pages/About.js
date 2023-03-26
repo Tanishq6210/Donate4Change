@@ -23,20 +23,38 @@ export default function Admin(){
         setNotifications(notifications)
     }
 
+    const myStyle = {
+      borderCollapse: 'collapse',
+      borderSpacing: '0',
+      width: '100%',
+      maxWidth: '800px',
+      margin: '0 auto',
+    };
+  
+    const tableRowStyle = {
+      backgroundColor: '#A6BB8D',
+    };
+  
+    const tableRowStyle2 = {
+      backgroundColor: '#61876E',
+    };
+  
+    const tableCellStyle = {
+      padding: '10px',
+      borderBottom: '2px solid white',
+      textAlign: 'center',
+    };
+
     return (
         <div className="about">
-            <Helmet>
-                <style>{'body { background-color: #EAE7B1; }'}</style>
-            </Helmet>
-            <h1>About</h1>
             <button className="button" onClick={getUserNotification}>Check Notifications</button>
             <center>
-      <table className="table" border={1.5} cellPadding={10} style={{ border: '2px solid black' }}>
+      <table className="table" style={myStyle}>
         <thead>
-        <tr>
-            <th>FROM</th>
-            <th>TITLE</th>
-            <th>MESSAGE</th>
+        <tr style={tableRowStyle2}>
+            <th style={tableCellStyle}>FROM</th>
+            <th style={tableCellStyle}>TITLE</th>
+            <th style={tableCellStyle}>MESSAGE</th>
           </tr>
         </thead>
         <tbody>
@@ -44,10 +62,10 @@ export default function Admin(){
             notifications.map(
               (info, ind) => {
                 return (
-                  <tr>
-                    <td>{info.app}</td>
-                    <td>{info.title}</td>
-                    <td>{info.message}</td>
+                  <tr style={tableRowStyle}>
+                    <td style={tableCellStyle}>{info.app}</td>
+                    <td style={tableCellStyle}>{info.title}</td>
+                    <td style={tableCellStyle}>{info.message}</td>
                   </tr>
                 )
               }

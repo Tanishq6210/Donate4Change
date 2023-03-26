@@ -13,7 +13,7 @@ const collectionReference = db.collection("NGO");
 
 function NGOs(){
     const [data, setData] = useState([]);
-    const [amt, setAmt] = useState("0");
+    const [amt, setAmt] = useState();
     const [ngoKey, setNgoKey] = useState("");
 
     let contractAddress = "0xfa5e95bdea02bC7BD3C7ba2F6705805975186aD2"
@@ -179,6 +179,33 @@ function NGOs(){
       listRecords();
     // }
 
+    // STYLE
+    const myStyle = {
+      fontSize: '20px',
+      
+    };
+
+    const myStyleBox = {
+      width: '300px',
+      height: '40px',
+      borderRadius: '5px',
+      border: '1px solid #345449',
+      padding: '5px',
+      fontSize: '16px',
+      marginLeft : '.9rem',
+    };
+
+    const myStyle2 = {
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '1000px',
+      height: '100px',
+      borderRadius: '5px',
+      padding: '20px',
+      fontSize : '20px',
+    };
+
     const handleChange = event => {
     setAmt(event.target.value);
 
@@ -186,7 +213,16 @@ function NGOs(){
     };
     return (
         <div className="about">
-            <center><h1>NGOs</h1></center>
+            <br></br>
+            <center>
+              <p style={myStyle}>Make a difference in someone's life by donating to NGOs. Your support can provide food, education, and medical aid to those in need.<br></br> Join us in creating a better world, one donation at a time.</p>
+              <br></br>
+            <div style={myStyle2}>
+            <p style={myStyle}>Enter amount you wish to donate:</p> 
+            
+            <input type="text" style={myStyleBox} onChange={handleChange} value={amt} placeholder="Enter your amount in ETH" autoComplete="off"></input>
+            </div>
+            </center>
             <center>
             <div className="flex-container">
             {data.map((obj, index) => (
@@ -196,15 +232,10 @@ function NGOs(){
                 <p>Description: {obj.data.desc}</p>
                 <p>Phone: {obj.data.phone}</p>
                 <p>NGO Key: {obj.data.address}</p>
-                <div>
-                Enter amount you want to donate: 
-                </div> 
                 <button onClick={() => donateNGO(obj.data.address)}>Donate Now</button> 
                 </div>
             ))}
             </div>
-            <input type="text" width = "20%"onChange={handleChange} value={amt} autoComplete="off"></input>
-            {/* <button onClick={getNGOs()}>Show NGOs</button> */}
             </center>
         </div>
     );

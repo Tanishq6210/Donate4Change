@@ -103,23 +103,39 @@ export default function Dashboard(){
         console.log(tx1)
     }
 
+    const myStyle = {
+      borderCollapse: 'collapse',
+      borderSpacing: '0',
+      width: '100%',
+      maxWidth: '800px',
+      margin: '0 auto',
+    };
+  
+    const tableRowStyle = {
+      backgroundColor: '#A6BB8D',
+    };
+  
+    const tableRowStyle2 = {
+      backgroundColor: '#61876E',
+    };
+  
+    const tableCellStyle = {
+      padding: '10px',
+      borderBottom: '2px solid white',
+    };
     // getAllTransactions()
 
     return (
         <div className="about">
-            <Helmet>
-                <style>{'body { background-color: #EAE7B1; }'}</style>
-            </Helmet>
-            <h1>Dashboard</h1>
             <button onClick={getAllTransactions}>Get All Transactions</button>
             <center>
-      <table className="table" border={1.5} cellPadding={10} style={{ border: '2px solid black' }}>
-        <thead>
-        <tr>
-            <th>FROM ADDRESS</th>
-            <th>TO ADDRESS</th>
-            <th>AMOUNT</th>
-            <th>TIME</th>
+            <table className="table" style={myStyle}>
+            <thead>
+        <tr style={tableRowStyle2}>
+            <th style={tableCellStyle}>FROM ADDRESS</th>
+            <th style={tableCellStyle}>TO ADDRESS</th>
+            <th style={tableCellStyle}>AMOUNT(in wei)</th>
+            <th style={tableCellStyle}>TIME</th>
           </tr>
         </thead>
         <tbody>
@@ -127,11 +143,11 @@ export default function Dashboard(){
             arr.map(
               (info, ind) => {
                 return (
-                  <tr>
-                    <td>{info[0]}</td>
-                    <td>{info[1]}</td>
-                    <td>{info[2].toNumber()}</td>
-                    <td>{info[3].toNumber()}</td>
+                  <tr style={tableRowStyle}>
+                    <td style={tableCellStyle}>{info[0]}</td>
+                    <td style={tableCellStyle}>{info[1]}</td>
+                    <td style={tableCellStyle}>{info[2].toNumber()}</td>
+                    <td style={tableCellStyle}>{info[3].toNumber()}</td>
                   </tr>
                 )
               }

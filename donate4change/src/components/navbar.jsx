@@ -20,7 +20,7 @@ function Navbar() {
             <ul className={active}>
                 <li className="nav__item"><Link to="/" className="nav__link">Home</Link></li>
                 <li className="nav__item"><Link to="/NGOs" className="nav__link">NGOs</Link></li>
-                <li className="nav__item"><Link to="/Dashboard" className="nav__link">Dashboard</Link></li>
+                <li className="nav__item"><Link to="/Dashboard" className="nav__link">Donation Logs</Link></li>
                 <li className="nav__item"><Link to="/Admin" className="nav__link">Admin</Link></li>
                 <li className="nav__item"><Link to="/About" className="nav__link">About</Link></li>
             </ul>
