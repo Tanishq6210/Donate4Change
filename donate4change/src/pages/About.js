@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import "./About.css";
 import {Helmet} from 'react-helmet';
 import * as PushAPI from "@pushprotocol/restapi";
@@ -45,9 +45,12 @@ export default function Admin(){
       textAlign: 'center',
     };
 
+    useEffect(() => {
+      getUserNotification();
+    }, []);
     return (
         <div className="about">
-            <button className="button" onClick={getUserNotification}>Check Notifications</button>
+            {/* <button className="button" onClick={getUserNotification}>Check Notifications</button> */}
             <center>
       <table className="table" style={myStyle}>
         <thead>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from 'react';
 import { Polybase } from "@polybase/client"
 import "./About.css";
@@ -105,6 +105,10 @@ function NGOs(){
         }
       ]
 
+      useEffect(() => {
+        listRecords();
+      }, []);
+
     async function listRecords () {
         const records = await collectionReference.get();
         setData(records.data);
@@ -147,6 +151,7 @@ function NGOs(){
       donate(address)
     } 
 
+    
     async function donate(address) {
        console.log(address.toString())
         const provider = new ethers.providers.Web3Provider(window.ethereum);

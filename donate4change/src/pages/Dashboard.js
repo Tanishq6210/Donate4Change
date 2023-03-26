@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./About.css";
 import {Helmet} from 'react-helmet';
 import {ethers} from "ethers"
@@ -125,9 +125,12 @@ export default function Dashboard(){
     };
     // getAllTransactions()
 
+    useEffect(() => {
+      getAllTransactions();
+    }, []);
     return (
         <div className="about">
-            <button onClick={getAllTransactions}>Get All Transactions</button>
+            {/* <button onClick={getAllTransactions}>Get All Transactions</button> */}
             <center>
             <table className="table" style={myStyle}>
             <thead>
