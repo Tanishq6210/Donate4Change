@@ -45,6 +45,15 @@ function Form() {
     event.preventDefault();
     console.log(formData);
     createRecord();
+
+    setFormData({
+      id: '',
+      name: '',
+      phone: '',
+      description: '',
+      address: ''
+    });
+    alert("New NGO added successfully!")
   }
 
   const myStyle = {
