@@ -187,7 +187,8 @@ function NGOs(){
     // STYLE
     const myStyle = {
       fontSize: '20px',
-      
+      color: "#3C6255",
+      fontStyle : "italic",
     };
 
     const myStyleBox = {
@@ -220,7 +221,7 @@ function NGOs(){
         <div className="about">
             <br></br>
             <center>
-              <p style={myStyle}>Make a difference in someone's life by donating to NGOs. Your support can provide food, education, and medical aid to those in need.<br></br> Join us in creating a better world, one donation at a time.</p>
+              <p style={myStyle}>"Make a difference in someone's life by donating to NGOs. Your support can provide food, education, and medical aid to those in need.<br></br> Join us in creating a better world, one donation at a time."</p>
               <br></br>
             <div style={myStyle2}>
             <p style={myStyle}>Enter amount you wish to donate:</p> 
@@ -233,11 +234,11 @@ function NGOs(){
             {data.map((obj, index) => (
                 <div className="card" key={index}>
                 <p id="title_para">{obj.data.name}</p>
-                <p>ID: {obj.data.id}</p>
-                <p>Description: {obj.data.desc}</p>
-                <p>Phone: {obj.data.phone}</p>
-                <p>NGO Key: {obj.data.address}</p>
-                <button onClick={() => donateNGO(obj.data.address)}>Donate Now</button> 
+                <p><b>Description:</b> {obj.data.desc}</p>
+                <p><b>ID:</b> {obj.data.id}</p>
+                <p><b>Phone:</b> {obj.data.phone}</p> <br></br>
+                <p><b>NGO Wallet Address:</b> {obj.data.address}</p>
+                <center><button onClick={() => donateNGO(obj.data.address)}>Donate Now</button> </center>
                 </div>
             ))}
             </div>

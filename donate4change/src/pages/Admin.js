@@ -47,6 +47,11 @@ function Form() {
     createRecord();
   }
 
+  const myStyle = {
+    textAlign: 'center',
+    fontSize : '30px',
+    color : "#3C6255",
+  };
   async function createRecord () {
     // .create(args) args array is defined by the constructor fn
     const recordData = await collectionReference.create([
@@ -66,7 +71,7 @@ function Form() {
         <br></br>
         <br></br>
     <div className="form-container">
-        <center><b>Add New NGO</b></center>
+        <center><b><p style={myStyle}>Add New NGO</p></b></center>
         <br></br>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
