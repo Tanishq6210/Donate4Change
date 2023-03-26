@@ -12,6 +12,8 @@ export default function Home(){
     const [signedIn, setSignedIn] = useState(false);
     const {auth}= useAuth();
 
+    const[buttonText, setButtonText] = useState("Join Us");
+
     async function opt_in() {
         const PK = '69e51a9f0c93ff5c52f66795b1434bf07ca827e412b38cfa52b3293ffc816c2e';
         const Pkey = `0x${PK}`;
@@ -41,6 +43,7 @@ export default function Home(){
         console.log("Before")
         await opt_in();
         console.log("After")
+        setButtonText("Opt in here!");
     }
 
     return (
@@ -57,7 +60,7 @@ export default function Home(){
                     <p className="para">In times of crisis, NGOs play a crucial role in supporting communities in need. But they can't do it alone. Your donation can help them provide essential services like food, shelter, education, and healthcare to those who need it most. By giving to an NGO, you become part of the solution, bringing hope and relief to people in difficult circumstances. Whether you can give a little or a lot, your donation makes a difference. So let's come together and support these organizations doing important work, and help make the world a better place.</p>
                     <br></br><br></br>
                     {/* POLYBASE SIGN IN */}
-                    <button className="button" onClick={() => SignIn()}>Join Us</button>
+                    <button className="button" onClick={() => SignIn()}>{buttonText}</button>
                     <div style={{visibility:signedIn?"visible":"hidden"}}><p className="details">You have logged In! <br></br> Using : {details.type}, <br></br> User ID : {details.userId}</p></div>
                 </div>
             </div>

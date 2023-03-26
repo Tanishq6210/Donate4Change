@@ -51,6 +51,7 @@ export default function Admin(){
     return (
         <div className="about">
             {/* <button className="button" onClick={getUserNotification}>Check Notifications</button> */}
+            <br></br>
             <center>
       <table className="table" style={myStyle}>
         <thead>

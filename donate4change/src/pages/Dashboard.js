@@ -107,7 +107,7 @@ export default function Dashboard(){
       borderCollapse: 'collapse',
       borderSpacing: '0',
       width: '100%',
-      maxWidth: '800px',
+      maxWidth: '1200px',
       margin: '0 auto',
     };
   
@@ -122,6 +122,7 @@ export default function Dashboard(){
     const tableCellStyle = {
       padding: '10px',
       borderBottom: '2px solid white',
+      textAlign: 'center',
     };
     // getAllTransactions()
 
@@ -131,6 +132,8 @@ export default function Dashboard(){
     return (
         <div className="about">
             {/* <button onClick={getAllTransactions}>Get All Transactions</button> */}
+            <br></br>
+            <br></br>
             <center>
             <table className="table" style={myStyle}>
             <thead>
