@@ -27,5 +27,12 @@ We also send the "Push" notification for successful transfer.
 
 ## How to Run ?
 Add .env file and add Private Key and mnemonic
-> Run the command : npm start
+> Run the command : npm start (after going to the main directory where all files are present)
 >> Import necessary libraries before running the above command
+>>> - npm i react
+>>> - npm i @polybase/react
+>>> - npm i @polybase/client
+>>> - npm i @polybase/eth
+>>> - npm i ethers@5.6.1
+>>> - npm i @pushprotocol/restapi
+>>> - npm i react-helmet
