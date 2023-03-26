@@ -171,8 +171,8 @@ function NGOs(){
 
         const tx = await contract.makeTransaction(addressToValue, weiAmountValue);
         console.log(tx)
-        sendNotification("You have donated " + ETHAmountValue + " ETH to " + addressToValue + "wei !")
-        alert("You have donated " + ETHAmountValue + " ETH to " + addressToValue + "wei !")
+        sendNotification("You have donated " + ETHAmountValue + " ETH to " + addressToValue + " wei !")
+        alert("You have donated " + ETHAmountValue + " ETH to " + addressToValue + " wei !")
     }
 
     // function getNGOs() {
